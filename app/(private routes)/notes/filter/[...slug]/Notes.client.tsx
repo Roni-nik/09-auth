@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/api/clientApi";
 import { showErrorToast } from "@/components/ShowErrorToast/ShowError";
 
 import NoteList from "@/components/NoteList/NoteList";
