@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/lib/store/authStore";
 import { ApiError } from "next/dist/server/api-utils";
-import { showErrorToast } from "@/components/ShowErrorToast/ShowErrorToast";
+import { showErrorToast } from "@/components/ShowErrorToast/ShowError";
 
 export default function EditProfilePage() {
   const router = useRouter();
