@@ -3,7 +3,7 @@
 import css from "./Notes.client.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { fetchNotes, NoteSearchResponse } from "@/lib/api/clientApi";
 import { showErrorToast } from "@/components/ShowErrorToast/ShowError";
