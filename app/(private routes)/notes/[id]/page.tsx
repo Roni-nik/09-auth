@@ -5,7 +5,7 @@ import { Metadata } from "next";
 
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+  const { id } =  params;
   const note = await fetchNoteById(id);
   return {
     title: `Note: ${note.title} | NoteHub`,
@@ -32,7 +32,7 @@ type Props = { params: { id: string } };
 
 export default async function NoteDetails({ params }: Props) {
   const queryClient = new QueryClient();
-  const { id } = await params;
+  const { id } =  params;
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
