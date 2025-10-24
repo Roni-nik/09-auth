@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 
-import { fetchNotes } from "@/lib/api/clientApi";
+import { fetchNotes, NoteSearchResponse } from "@/lib/api/clientApi";
 import { showErrorToast } from "@/components/ShowErrorToast/ShowError";
 
 import NoteList from "@/components/NoteList/NoteList";
@@ -17,7 +17,7 @@ import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
 
 type NoteClientProps = {
-
+initialData: NoteSearchResponse,
   tag: string;
 };
 
@@ -38,16 +38,14 @@ export default function NotesClient({ tag }: NoteClientProps) {
   };
   const queryTag = tag === "All" ? undefined : tag;
 
-  const { data, isLoading, isSuccess, isError } = useQuery({
-    queryKey: ["notes", searchQuery, tag, currentPage],
+  const { data, isLoading, isSuccess, isError } = useQuery<NoteSearchResponse>({
+    queryKey: ["notes", searchQuery, queryTag, currentPage],
     queryFn: () =>
       fetchNotes({
-        searchQuery: searchQuery,
+        searchQuery,
         tag: queryTag,
         page: currentPage,
       }),
-    placeholderData: keepPreviousData,
-   
   });
 
   const totalPages = data?.totalPages || 0;
@@ -55,6 +53,8 @@ export default function NotesClient({ tag }: NoteClientProps) {
   const noNotesToastShown = useRef(false);
 
   const successContent = isSuccess && data?.notes?.length > 0 && (
+    
+    
     <NoteList notes={data.notes} />
   );
 
@@ -101,3 +101,4 @@ export default function NotesClient({ tag }: NoteClientProps) {
     </div>
   );
 }
+

@@ -1,5 +1,15 @@
 .app {
-    padding: 0 16px;
+    width: 90%;
+    max-width: 1280px;
+    margin: 0px auto;
+    padding: 0 16px 16px;
+}
+.toolbar{
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
 }
 .pagination {
     display: flex;
@@ -30,4 +40,18 @@
     background-color: #0a66c2;
     color: white;
     font-weight: bold;
+}
+.button {
+    padding: 6px 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #0a66c2;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+}
+.button-hover {
+    background-color: #0b5ed7;
 }
