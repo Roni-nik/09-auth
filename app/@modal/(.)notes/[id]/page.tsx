@@ -6,9 +6,21 @@ type Props = {
   params: { id: string };
 };
 
-const NotePreview = async ({ params }: Props) => {
+// const NotePreview = async ({ params }: Props) => {
+//   const queryClient = new QueryClient();
+//   const { id } =  params;
+//   await queryClient.prefetchQuery({
+//     queryKey: ["note", id],
+//     queryFn: () => fetchNoteById(id),
+//   });
+export default async function NotePreview({
+  params,
+}: {
+  params: { id: string };
+}) {
   const queryClient = new QueryClient();
-  const { id } =  params;
+  const { id } = params;
+
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
@@ -19,4 +31,4 @@ const NotePreview = async ({ params }: Props) => {
   return <NotePreviewModal dehydratedState={dehydratedState} />;
 };
 
-export default NotePreview;
+// export default NotePreview;
