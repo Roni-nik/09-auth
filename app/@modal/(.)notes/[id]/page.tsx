@@ -3,12 +3,12 @@ import NotePreviewModal from "./NotePreview.client";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 };
 
 const NotePreview = async ({ params }: Props) => {
   const queryClient = new QueryClient();
-  const { id } = await params;
+  const { id } =  params;
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
