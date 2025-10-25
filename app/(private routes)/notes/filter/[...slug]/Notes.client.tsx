@@ -17,15 +17,16 @@ import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
 
 type NoteClientProps = {
-initialData: NoteSearchResponse,
   tag: string;
+  initialData?: NoteSearchResponse; 
 };
 
-export default function NotesClient({ tag }: NoteClientProps) {
+export default function NotesClient({ tag, initialData }: NoteClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [inputValue, setInputValue] = useState("");
   
+
 
   const updateSearchQuery = useDebouncedCallback((value: string) => {
     setSearchQuery(value);
@@ -37,17 +38,20 @@ export default function NotesClient({ tag }: NoteClientProps) {
     updateSearchQuery(value);
   };
   const queryTag = tag === "All" ? undefined : tag;
+  const search = inputValue.trim();
+  
 
   const { data, isLoading, isSuccess, isError } = useQuery<NoteSearchResponse>({
-    queryKey: ["notes", searchQuery, queryTag, currentPage],
+    queryKey: ["notes", search, queryTag, currentPage],
     queryFn: () =>
       fetchNotes({
-        searchQuery,
+        searchQuery: search,
         tag: queryTag,
         page: currentPage,
       }),
+    initialData
   });
-
+  
   const totalPages = data?.totalPages || 0;
 
   const noNotesToastShown = useRef(false);

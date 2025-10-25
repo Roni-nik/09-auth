@@ -32,7 +32,7 @@ export async function fetchNotes({
 }): Promise<NoteSearchResponse> {
   const response = await nextServer.get<NoteSearchResponse>(`/notes`, {
     params: {
-      ...(searchQuery && { searchQuery: searchQuery }),
+      ...(searchQuery && { search: searchQuery }),
       ...(tag && tag !== "All" && { tag }),
       perPage: 9,
       page,
@@ -89,7 +89,7 @@ export const logout = async (): Promise<void> => {
   await nextServer.post("/auth/logout");
 };
 
-export const editProfile = async (data: EditRequest): Promise<EditRequest> => {
+export const editProfile = async (data: EditRequest): Promise<User> => {
   const res = await nextServer.patch("/users/me", data);
-  return res.data;
+  return res.data as User;
 };
